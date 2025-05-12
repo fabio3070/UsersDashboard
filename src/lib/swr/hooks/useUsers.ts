@@ -1,30 +1,23 @@
 import useSWR from 'swr';
-import { swrFetcher } from '@/services/http/fetcher';
 import type { PaginatedResponse } from '@/types/api';
 import type { User } from '@/types/user';
+import { UserService } from '@/services/api/users';
 
-const DEFAULTPAGINATION = {
-    page: '1',
-    limit: '6'
-}
 /**
  * Custom hook for fetching all users
  * @param params Pagination and filtering options
+ * Grants correct typing to the API request
+ * Adds optional optimization
+ * Where our fetching technology(SWR) is implemented
  */
 export const useUsers = (params?: {
   page?: number;
   limit?: number;
   search?: string;
 }) => {
-    const queryString = new URLSearchParams({
-        page: params?.page?.toString() ?? DEFAULTPAGINATION.page,
-        per_page: params?.limit?.toString() ?? DEFAULTPAGINATION.limit,
-        ...(params?.search && { search: params.search })
-      }).toString();
-
     return useSWR<PaginatedResponse<User>>(
         ['/users', params],
-        ([url]) => swrFetcher(`${url}?${queryString}`),
+        ([params]) => UserService.getAll(params),
         {
         revalidateOnFocus: false,
         keepPreviousData: true, // Smooth pagination transitions
