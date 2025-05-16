@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #F97316;
+    --color-primary-dark: #EA580C;
+    --color-secondary: #6B7280;
+    --color-background: #F9FAFB;
+    --color-surface: #FFFFFF;
+    --color-text-primary: #1F2937;
+    --color-text-muted: #9CA3AF;
+    --color-accent: #3B82F6;
+    --color-error: #EF4444;
+}
+
+@layer components {
+    .custom-container {
+        @apply overflow-x-auto mt-8 mb-8 page-max-width;
+    }
+    .logo {
+        @apply text-primary page-max-width mt-4 mx-4 text-2xl;
+    }
+}
+
+@utility page-max-width {
+    @apply mx-2 md:mx-4 lg:mx-16;
+}
+
+body {
+    @apply bg-background;
+}

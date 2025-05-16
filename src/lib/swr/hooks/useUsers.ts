@@ -12,18 +12,19 @@ import { UserService } from '@/services/api/users';
  */
 export const useUsers = (params?: {
   page?: number;
-  limit?: number;
+  per_page?: number;
   search?: string;
 }) => {
-    return useSWR<PaginatedResponse<User>>(
-        ['/users', params],
-        ([params]) => UserService.getAll(params),
-        {
-        revalidateOnFocus: false,
-        keepPreviousData: true, // Smooth pagination transitions
-        dedupingInterval: 1000 * 60 * 5, // Verificar o que é Dedupe
-        }
-    );
+  console.log(params);
+  return useSWR<PaginatedResponse<User>>(
+      ['/users', params],
+      () => UserService.getAll(params),
+      {
+      revalidateOnFocus: false,
+      keepPreviousData: true, // Smooth pagination transitions
+      dedupingInterval: 1000 * 60 * 5, // Verificar o que é Dedupe
+      }
+  );
 };
 
 /**

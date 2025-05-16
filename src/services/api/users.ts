@@ -13,12 +13,13 @@ const DEFAULTPAGINATION = {
 export const UserService = {
   getAll: (params?: {
     page?: number;
-    limit?: number;
+    per_page?: number;
     search?: string;
   }) => {
+    console.log(params?.per_page);
     const queryString = new URLSearchParams({
       page: params?.page?.toString() ?? DEFAULTPAGINATION.page,
-      per_page: params?.limit?.toString() ?? DEFAULTPAGINATION.limit
+      per_page: params?.per_page?.toString() ?? DEFAULTPAGINATION.limit
     }).toString();
 
     return httpClient<PaginatedResponse<User>>({
