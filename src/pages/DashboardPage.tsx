@@ -1,13 +1,12 @@
 import Header from '@/components/layout/Header';
-import { UsersTable } from '@/features/dashboard/components/UsersTable';
-import { PaginationProvider } from '@/features/dashboard/contexts/paginationContext';
+import { Table } from '@/features/dashboard/components/Table';
 
 export default function DashboardPage() {
 
   return (
-    <PaginationProvider>
-        <Header />
-        <UsersTable />
-    </PaginationProvider>
+    <>
+      <Header />
+      <Table />
+    </>
   )
 }

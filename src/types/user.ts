@@ -5,3 +5,8 @@ export type User = {
     last_name: string,
     avatar: string
 }
+
+export type Pagination = {
+    page: number;
+    per_page: number;
+};
