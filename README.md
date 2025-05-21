@@ -23,6 +23,7 @@ A modern, accessible user dashboard built with React, TypeScript, and Tailwind C
 
 ## Project Structure
 ```mermaid
+graph TD;
 src/
 ├── components/ # Shared UI components
 ├── features/
