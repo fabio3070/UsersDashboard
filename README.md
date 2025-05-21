@@ -46,7 +46,7 @@ src/
 - Utility-first approach for rapid development
 
 ### 2. Data Fetching Strategy
-```mermaid
+```ruby
     Component -->|useUsers| SWRHook
     SWRHook -->|calls| ApiService
     ApiService -->|uses| HttpClient
