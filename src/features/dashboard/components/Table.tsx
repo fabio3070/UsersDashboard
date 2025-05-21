@@ -1,9 +1,8 @@
 import { TableSkeleton } from '@/components/skeletons/TableSkeleton';
 import TableOptions from '@/features/dashboard/components/TableOptions';
-import { useUsers } from '@/lib/swr/hooks/useUsers';
-import type { Pagination } from '@/types/user';
-import { useState } from 'react'
 import { TableRow } from './TableRow';
+import ErrorText from '@/components/ui/ErrorText';
+import { useUserTable } from '../hooks/useUsersTable';
 
 const headers = [
     { key: 'name', label: 'Name' },
@@ -11,19 +10,25 @@ const headers = [
 ];
 
 export const Table = () => {
-  const [pagination, setPagination] = useState<Pagination>({
-      page: 1,
-      per_page: 4
-  });
-  const { data, error, isLoading } = useUsers(pagination);
-  const users = data?.data || [];
-  const hasMoreData = users.length >= pagination.per_page;
-
-  if (error) return <p>No data found</p>;
+  const {
+    users,
+    error,
+    isLoading,
+    pagination,
+    handleNext,
+    handlePrev,
+    isPrevDisabled,
+    isNextDisabled,
+  } = useUserTable();
     
   return (
     <section className="custom-container bg-surface rounded py-2">
-        <TableOptions pagination={pagination} setPagination={setPagination} hasMoreData={hasMoreData}/>
+        <TableOptions 
+        onNext={handleNext} 
+        onPrev={handlePrev} 
+        isPrevDisabled={isPrevDisabled}
+        isNextDisabled={isNextDisabled}
+        />
         <table className="min-w-full divide-y divide-primary ">
             <thead>
                 <tr>
@@ -38,6 +43,13 @@ export const Table = () => {
                 ))}
                 </tr>
             </thead>
+            {error && 
+              <tr>
+                <td colSpan={2}>
+                  <ErrorText />
+                </td>
+              </tr>
+            }
             {isLoading ? (
               <TableSkeleton pagination={pagination} />
             ): (

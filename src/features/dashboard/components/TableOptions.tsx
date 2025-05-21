@@ -1,38 +1,47 @@
 import { LeftArrow, RightArrow } from '@/components/icons/DirectionArrows';
-import type { Pagination } from '@/types/user';
 
 type TableOptionsProps = {
-  pagination: Pagination;
-  setPagination: React.Dispatch<React.SetStateAction<Pagination>>,
-  hasMoreData: boolean
-}
-export default function TableOptions({pagination, setPagination, hasMoreData}: TableOptionsProps) {
-
-  const onClickPrevPage = () => {
-    if (pagination.page > 1) setPagination({ ...pagination, page: pagination.page - 1 });
-  }
-  const onClickNextPage = () => {
-    if(hasMoreData) setPagination({ ...pagination, page: pagination.page + 1 });
-  }
-
+  onPrev: () => void;
+  onNext: () => void;
+  isPrevDisabled: boolean;
+  isNextDisabled: boolean;
+  PrevButton?: React.ComponentType<{ disabled: boolean; onClick: () => void }>;
+  NextButton?: React.ComponentType<{ disabled: boolean; onClick: () => void }>;
+};
+export default function TableOptions({
+  onPrev,
+  onNext,
+  isPrevDisabled,
+  isNextDisabled,
+  PrevButton = DefaultPrevButton,
+  NextButton = DefaultNextButton,
+}: TableOptionsProps) {
   return (
-    <section className='mb-2'>
-        <section className='mx-auto flex justify-end px-2 gap-4'>
-            <button 
-            onClick={onClickPrevPage}
-            disabled={pagination.page === 1}
-            className={pagination.page === 1 ? 'opacity-50 cursor-not-allowed' : ''}
-            >
-                <LeftArrow />
-            </button>
-            <button 
-            onClick={onClickNextPage}
-            disabled={!hasMoreData}
-            className={!hasMoreData ? 'opacity-50 cursor-not-allowed' : ''}
-            >
-                <RightArrow />
-            </button>
-        </section>
+    <section className="mb-2">
+      <section className="mx-auto flex justify-end px-2 gap-4">
+        <PrevButton disabled={isPrevDisabled} onClick={onPrev} />
+        <NextButton disabled={isNextDisabled} onClick={onNext} />
+      </section>
     </section>
-  )
+  );
 }
+
+const DefaultPrevButton = ({ disabled, onClick }: { disabled: boolean; onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={disabled ? 'opacity-50 cursor-not-allowed' : ''}
+  >
+    <LeftArrow />
+  </button>
+);
+
+const DefaultNextButton = ({ disabled, onClick }: { disabled: boolean; onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={disabled ? 'opacity-50 cursor-not-allowed' : ''}
+  >
+    <RightArrow />
+  </button>
+);

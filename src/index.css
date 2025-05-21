@@ -17,7 +17,10 @@
         @apply overflow-x-auto mt-8 mb-8 page-max-width;
     }
     .logo {
-        @apply text-primary page-max-width mt-4 mx-4 text-2xl;
+        @apply overflow-x-auto text-primary page-max-width mt-8 text-2xl;
+    }
+    .center {
+        @apply flex justify-center items-center;
     }
 }
 
