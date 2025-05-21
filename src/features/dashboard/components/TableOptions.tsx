@@ -31,6 +31,7 @@ const DefaultPrevButton = ({ disabled, onClick }: { disabled: boolean; onClick: 
     onClick={onClick}
     disabled={disabled}
     className={disabled ? 'opacity-50 cursor-not-allowed' : ''}
+    aria-label='Previous'
   >
     <LeftArrow />
   </button>
@@ -41,6 +42,7 @@ const DefaultNextButton = ({ disabled, onClick }: { disabled: boolean; onClick: 
     onClick={onClick}
     disabled={disabled}
     className={disabled ? 'opacity-50 cursor-not-allowed' : ''}
+    aria-label='Next'
   >
     <RightArrow />
   </button>
