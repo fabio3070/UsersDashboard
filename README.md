@@ -22,8 +22,7 @@ A modern, accessible user dashboard built with React, TypeScript, and Tailwind C
 | Architecture     | Feature-based          |
 
 ## Project Structure
-```mermaid
-graph TD;
+```
 src/
 ├── components/ # Shared UI components
 ├── features/
@@ -70,16 +69,16 @@ Each feature folder contains only the code relevant to that specific feature. Sh
 ## Installing Guide
 
 ### 1. 📦 Install Dependencies
-```mermaid
+```
 npm install
 ```
 
 ### 2. ▶️ Start Development Server
-```mermaid
+```
 npm install
 ```
 
 ### 3. ▶️ Open the Development Server
-```mermaid
+```
 http://localhost:5173/
 ```
